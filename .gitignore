@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# sqlite db
+*.db
+
+# Wing IDE project
+*.wpr
