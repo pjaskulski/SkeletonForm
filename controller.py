@@ -57,6 +57,7 @@ def delete_record(session, id_num):
     """
     record = session.query(Skeleton).filter_by(skeleton_id=id_num).one()
     session.delete(record)
+    session.flush()
     session.commit()
 
 
@@ -72,7 +73,8 @@ def edit_record(session, id_num, row):
     record.skeleton = row["skeleton"]
     record.observer = row["observer"]
     record.obs_date = row["obs_date"]
-    # session.add(record)
+    session.add(record)
+    session.flush()
     session.commit()
 
 

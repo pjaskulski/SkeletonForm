@@ -9,6 +9,7 @@ from reportlab.lib.units import mm
 from reportlab.graphics import renderPDF, renderPM
 from svglib.svglib import svg2rlg
 from lxml import etree
+import os
 
 
 class SheetExport():
@@ -68,8 +69,8 @@ class SheetExport():
                 data['sphenoid'],
                 '',
                 'Mandible',
-                data['mandible_l'],
-                data['mandible_r'],
+                data['mandible'],
+                '',
                 'Ethmoid',
                 data['ethmoid']
                 ]
@@ -130,6 +131,7 @@ class SheetExport():
                                ('FONTNAME', (0, 0), (-1, -1), 'Arial'),
                                ('SPAN', (1, 1), (2, 1)),
                                ('SPAN', (4, 1), (5, 1)),
+                               ('SPAN', (7, 1), (8, 1)),
                                ('SPAN', (1, 3), (2, 3)),
                                ('ALIGN', (0, 0), (8, 0), 'CENTER'),
                                ('ALIGN', (1, 1), (2, 4), 'CENTER'),
@@ -161,7 +163,17 @@ class SheetExport():
         elements.append(drawing)
 
         # write the document to disk
-        doc.build(elements)
+        try:
+            doc.build(elements)
+        except Exception as e:
+            result = '{}'.format(e)
+        else:
+            result = ''
+        finally:
+            if os.path.exists('skull_tmp.svg'):
+                os.remove('skull_tmp.svg')
+
+        return result
 
     def create_svg(self, file_out, bone):
         """ """
@@ -176,8 +188,8 @@ class SheetExport():
         for action, el in etree.iterwalk(doc):
             id = el.attrib.get('id')
             if id in bone:
-                print(el.tag)
-                print(el.attrib)
+                # print(el.tag)
+                # print(el.attrib)
                 attributes = el.attrib
                 attributes["style"] = colors[bone[id]] + ";fill-opacity:1"
                 if len(el) > 0:

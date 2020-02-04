@@ -84,6 +84,10 @@ class SkeletonPanel(wx.Panel):
         with wx.FileDialog(None, "Choose a file", wildcard=wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 self.db_name = dialog.GetPath()
+                # zapis w ostatnio używanych plikach
+                self.parent.filehistory.AddFileToHistory(dialog.GetPath())
+                self.parent.filehistory.Save(self.parent.config)
+                self.parent.config.Flush()
                 if self.session != None:
                     self.skeleton_results_olv.DeleteAllItems()
                     self.parent.SetTitle("{}: ".format(APP_NAME))
@@ -98,6 +102,10 @@ class SkeletonPanel(wx.Panel):
         with wx.FileDialog(None, "Create a file", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 self.db_name = dialog.GetPath()
+                # zapis w ostatnio używanych plikach
+                self.parent.filehistory.AddFileToHistory(dialog.GetPath())
+                self.parent.filehistory.Save(self.parent.config)
+                self.parent.config.Flush()
                 if self.session != None:
                     self.skeleton_results_olv.DeleteAllItems()
                     self.parent.SetTitle("{}: ".format(APP_NAME))
@@ -209,8 +217,7 @@ class SkeletonPanel(wx.Panel):
         data['obs_date'] = rekord.obs_date
         data['frontal'] = rekord.frontal if rekord.frontal != None else 0
         data['sphenoid'] = rekord.sphenoid if rekord.sphenoid != None else 0
-        data['mandible_l'] = rekord.mandible_l if rekord.mandible_l != None else 0
-        data['mandible_r'] = rekord.mandible_r if rekord.mandible_r != None else 0
+        data['mandible'] = rekord.mandible if rekord.mandible != None else 0
         data['ethmoid'] = rekord.ethmoid if rekord.ethmoid != None else 0
         data['parietal_l'] = rekord.parietal_l if rekord.parietal_l != None else 0
         data['parietal_r'] = rekord.parietal_r if rekord.parietal_r != None else 0
@@ -234,7 +241,11 @@ class SkeletonPanel(wx.Panel):
         data['calotte'] = rekord.calotte if rekord.calotte != None else 0
 
         report = SheetExport()
-        report.export_sheet(filename, data)
+        result = report.export_sheet(filename, data)
+        if result != '':
+            dialogs.show_message('Problems occurred during the creation of the report:\n{}'.format(e), 'Error')
+
+        self.skeleton_results_olv.SetFocus()
 
     def search(self, event):
         """
@@ -285,6 +296,8 @@ class SkeletonFrame(wx.Frame):
         """
         super().__init__(None, title=APP_NAME, size=(800, 600))
         self.panel = SkeletonPanel(self)
+        self.filehistory = wx.FileHistory(8)
+        self.config = wx.Config(APP_NAME, style=wx.CONFIG_USE_LOCAL_FILE)
         self.create_menu()
         self.SetMinSize(wx.Size(400, 300))
         self.Show()
@@ -305,17 +318,43 @@ class SkeletonFrame(wx.Frame):
         info.License = wordwrap("MIT", 500, wx.ClientDC(self.panel))
         wx.adv.AboutBox(info)
 
+    def on_file_history(self, event):
+        fileNum = event.GetId() - wx.ID_FILE1
+        path = self.filehistory.GetHistoryFile(fileNum)
+        self.filehistory.AddFileToHistory(path)
+        self.panel.db_name = path
+
+        if self.panel.session != None:
+            self.panel.skeleton_results_olv.DeleteAllItems()
+            self.panel.parent.SetTitle("{}: ".format(APP_NAME))
+            self.panel.session.close()
+
+        self.panel.session = controller.connect_to_database(self.panel.db_name)
+        self.SetTitle("{}: ".format(APP_NAME) + self.panel.db_name)
+        self.panel.show_all_records()
+
     def create_menu(self):
         menu_bar = wx.MenuBar()
         file_menu = wx.Menu()
+
+        self.filehistory.Load(self.config)
+
         create_db_menu_item = file_menu.Append(wx.ID_NEW, 'Create DB\tCtrl+N', 'Create database file')
         open_db_menu_item = file_menu.Append(wx.ID_OPEN, 'Open DB\tCtrl+O', 'Open database file')
+
+        # ostatnio używane pliki
+        recent = wx.Menu()
+        self.filehistory.UseMenu(recent)
+        self.filehistory.AddFilesToMenu()
+        file_menu.Append(wx.ID_ANY, "&Recent Files", recent)
+
         file_menu.AppendSeparator()
         exit_menu_item = file_menu.Append(wx.ID_EXIT, '&Quit\tCtrl+Q', 'Quit application')
 
         menu_bar.Append(file_menu, "&File")
         self.Bind(wx.EVT_MENU, self.panel.on_open_file, open_db_menu_item)
         self.Bind(wx.EVT_MENU, self.panel.on_create_file, create_db_menu_item)
+        self.Bind(wx.EVT_MENU_RANGE, self.on_file_history, id=wx.ID_FILE1, id2=wx.ID_FILE9)
         self.Bind(wx.EVT_MENU, self.on_exit, exit_menu_item)
 
         help_menu = wx.Menu()

@@ -131,7 +131,7 @@ class RecordDialog(wx.Dialog):
         if self.skeleton_dict is None:
             return
 
-        skeleton_id = controller.add_record(self.session, self.skeleton_dict)
+        self.skeleton_id = controller.add_record(self.session, self.skeleton_dict)
         self.result = 1
         self.Close()
 
