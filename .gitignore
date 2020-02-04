@@ -133,3 +133,5 @@ dmypy.json
 
 # Wing IDE project
 *.wpr
+
+# pdf files
