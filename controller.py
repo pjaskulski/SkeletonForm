@@ -115,3 +115,15 @@ def find_skeleton(session, skeleton_id):
     result = session.query(Skeleton).get(skeleton_id)
 
     return result
+
+
+def edit_preservation(session, id_num, data):
+    """ 
+    Edit a record 
+    data - dictionary: {'forntal': 1}
+    """
+
+    record = session.query(Skeleton).filter_by(skeleton_id=id_num).update(data)
+
+    session.flush()
+    session.commit()

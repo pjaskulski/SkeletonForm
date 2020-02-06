@@ -1,9 +1,9 @@
 import wx
-from ObjectListView import ObjectListView, ColumnDefn
-from wx.lib.wordwrap import wordwrap
 import os
 import controller
 import dialogs
+from ObjectListView import ObjectListView, ColumnDefn
+from wx.lib.wordwrap import wordwrap
 from model import olvSkeleton
 from sheet import SheetExport
 
@@ -34,20 +34,20 @@ class SkeletonPanel(wx.Panel):
         categories = ["Site", "Location", "Observer", "Skeleton"]
         search_label = wx.StaticText(self, label=" Filter By:")
         search_label.SetFont(font)
-        search_sizer.Add(search_label, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5)
-        search_sizer.AddSpacer(5) 
+        search_sizer.Add(search_label, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 5)
+        search_sizer.AddSpacer(5)
 
         self.categories = wx.ComboBox(
             self, value="Skeleton", choices=categories, style=wx.CB_READONLY)
         search_sizer.Add(self.categories, 0, wx.ALL, 5)
-        
-        search_sizer.AddSpacer(5) 
+
+        search_sizer.AddSpacer(5)
         self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER, size=(200, -1))
-        #self.search_ctrl.ShowCancelButton(True)
+        # self.search_ctrl.ShowCancelButton(True)
         self.search_ctrl.SetDescriptiveText('Filter')
         self.search_ctrl.Bind(wx.EVT_TEXT_ENTER, self.search)
         search_sizer.Add(self.search_ctrl, 0, wx.ALIGN_CENTER_VERTICAL, 5)
-        search_sizer.AddSpacer(5) 
+        search_sizer.AddSpacer(5)
 
         self.show_all_btn = wx.Button(self, label="Show All")
         self.show_all_btn.Bind(wx.EVT_BUTTON, self.on_show_all)
@@ -90,7 +90,7 @@ class SkeletonPanel(wx.Panel):
         main_sizer.Add(self.skeleton_results_olv, 1, wx.ALL | wx.EXPAND, 5)
         main_sizer.Add(btn_sizer, 0, wx.CENTER)
         self.SetSizer(main_sizer)
-    
+
     def controls_state(self, state):
         self.add_record_btn.Enable(state)
         self.edit_record_btn.Enable(state)
@@ -98,7 +98,7 @@ class SkeletonPanel(wx.Panel):
         self.delete_record_btn.Enable(state)
         self.report_btn.Enable(state)
         self.show_all_btn.Enable(state)
-        #self.search_ctrl.Enable(state)
+        # self.search_ctrl.Enable(state)
 
     def on_open_file(self, event):
         wildcard = "DATABASE files (*.db)|*.db"
@@ -217,8 +217,8 @@ class SkeletonPanel(wx.Panel):
 
         with dialogs.PreservationDialog(self.session, selected_row) as dlg:
             dlg.CenterOnScreen()
-            dlg.ShowModal()    
-        
+            dlg.ShowModal()
+
         self.skeleton_results_olv.SetFocus()
 
     def show_all_records(self, active_row=0):
