@@ -32,20 +32,26 @@ class SkeletonPanel(wx.Panel):
 
         # create the search related widgets
         categories = ["Site", "Location", "Observer", "Skeleton"]
-        search_label = wx.StaticText(self, label="Search By:")
+        search_label = wx.StaticText(self, label=" Filter By:")
         search_label.SetFont(font)
-        search_sizer.Add(search_label, wx.ALIGN_CENTER_VERTICAL, wx.ALL, 5)
+        search_sizer.Add(search_label, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5)
+        search_sizer.AddSpacer(5) 
 
         self.categories = wx.ComboBox(
             self, value="Skeleton", choices=categories, style=wx.CB_READONLY)
         search_sizer.Add(self.categories, 0, wx.ALL, 5)
-        self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER)
+        
+        search_sizer.AddSpacer(5) 
+        self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER, size=(200, -1))
+        #self.search_ctrl.ShowCancelButton(True)
+        self.search_ctrl.SetDescriptiveText('Filter')
         self.search_ctrl.Bind(wx.EVT_TEXT_ENTER, self.search)
-        search_sizer.Add(self.search_ctrl, 0, wx.ALL, 5)
+        search_sizer.Add(self.search_ctrl, 0, wx.ALIGN_CENTER_VERTICAL, 5)
+        search_sizer.AddSpacer(5) 
 
-        show_all_btn = wx.Button(self, label="Show All")
-        show_all_btn.Bind(wx.EVT_BUTTON, self.on_show_all)
-        search_sizer.Add(show_all_btn, 0, wx.ALL, 5)
+        self.show_all_btn = wx.Button(self, label="Show All")
+        self.show_all_btn.Bind(wx.EVT_BUTTON, self.on_show_all)
+        search_sizer.Add(self.show_all_btn, 0, wx.ALL, 5)
 
         lfont = self.GetFont()
         lfont.SetPointSize(10)
@@ -58,26 +64,41 @@ class SkeletonPanel(wx.Panel):
         self.update_skeleton_results()
 
         # create the button row
-        add_record_btn = wx.Button(self, label="&Add")
-        add_record_btn.Bind(wx.EVT_BUTTON, self.add_record)
-        btn_sizer.Add(add_record_btn, 0, wx.ALL, 5)
+        self.add_record_btn = wx.Button(self, label="&Add")
+        self.add_record_btn.Bind(wx.EVT_BUTTON, self.add_record)
+        btn_sizer.Add(self.add_record_btn, 0, wx.ALL, 5)
 
-        edit_record_btn = wx.Button(self, label="&Edit")
-        edit_record_btn.Bind(wx.EVT_BUTTON, self.edit_record)
-        btn_sizer.Add(edit_record_btn, 0, wx.ALL, 5)
+        self.edit_record_btn = wx.Button(self, label="&Edit")
+        self.edit_record_btn.Bind(wx.EVT_BUTTON, self.edit_record)
+        btn_sizer.Add(self.edit_record_btn, 0, wx.ALL, 5)
 
-        delete_record_btn = wx.Button(self, label="&Delete")
-        delete_record_btn.Bind(wx.EVT_BUTTON, self.delete_record)
-        btn_sizer.Add(delete_record_btn, 0, wx.ALL, 5)
+        self.pre_record_btn = wx.Button(self, label="&Preservation")
+        self.pre_record_btn.Bind(wx.EVT_BUTTON, self.edit_preservation)
+        btn_sizer.Add(self.pre_record_btn, 0, wx.ALL, 5)
 
-        report_btn = wx.Button(self, label="&Create a report")
-        report_btn.Bind(wx.EVT_BUTTON, self.create_report)
-        btn_sizer.Add(report_btn, 0, wx.ALL, 5)
+        self.delete_record_btn = wx.Button(self, label="&Delete")
+        self.delete_record_btn.Bind(wx.EVT_BUTTON, self.delete_record)
+        btn_sizer.Add(self.delete_record_btn, 0, wx.ALL, 5)
+
+        self.report_btn = wx.Button(self, label="&Create a report")
+        self.report_btn.Bind(wx.EVT_BUTTON, self.create_report)
+        btn_sizer.Add(self.report_btn, 0, wx.ALL, 5)
+
+        self.controls_state(False)
 
         main_sizer.Add(search_sizer)
         main_sizer.Add(self.skeleton_results_olv, 1, wx.ALL | wx.EXPAND, 5)
         main_sizer.Add(btn_sizer, 0, wx.CENTER)
         self.SetSizer(main_sizer)
+    
+    def controls_state(self, state):
+        self.add_record_btn.Enable(state)
+        self.edit_record_btn.Enable(state)
+        self.pre_record_btn.Enable(state)
+        self.delete_record_btn.Enable(state)
+        self.report_btn.Enable(state)
+        self.show_all_btn.Enable(state)
+        #self.search_ctrl.Enable(state)
 
     def on_open_file(self, event):
         wildcard = "DATABASE files (*.db)|*.db"
@@ -95,6 +116,7 @@ class SkeletonPanel(wx.Panel):
 
                 self.session = controller.connect_to_database(self.db_name)
                 self.parent.SetTitle("{}: ".format(APP_NAME) + self.db_name)
+                self.controls_state(True)
                 self.show_all_records()
 
     def on_create_file(self, event):
@@ -113,6 +135,7 @@ class SkeletonPanel(wx.Panel):
 
                 self.session = controller.connect_to_database(self.db_name)
                 self.parent.SetTitle("{}: ".format(APP_NAME) + self.db_name)
+                self.controls_state(True)
                 self.show_all_records()
 
     def add_record(self, event):
@@ -120,6 +143,7 @@ class SkeletonPanel(wx.Panel):
         Add a record to the database
         """
         with dialogs.RecordDialog(self.session) as dlg:
+            dlg.CenterOnScreen()
             dlg.ShowModal()
             if dlg.result == 1:
                 data = {}
@@ -146,6 +170,7 @@ class SkeletonPanel(wx.Panel):
             return
 
         with dialogs.RecordDialog(self.session, selected_row, title='Modify', addRecord=False) as dlg:
+            dlg.CenterOnScreen()
             dlg.ShowModal()
             if dlg.result == 1:
                 self.skeleton_results_olv.RefreshObject(selected_row)
@@ -181,6 +206,19 @@ class SkeletonPanel(wx.Panel):
                 row_index -= 1
 
         self.skeleton_results_olv.Select(row_index)
+        self.skeleton_results_olv.SetFocus()
+
+    def edit_preservation(self, event):
+        selected_row = self.skeleton_results_olv.GetSelectedObject()
+        active_row = self.skeleton_results_olv.GetIndexOf(selected_row)
+        if selected_row is None:
+            dialogs.show_message('No record selected!', 'Error')
+            return
+
+        with dialogs.PreservationDialog(self.session, selected_row) as dlg:
+            dlg.CenterOnScreen()
+            dlg.ShowModal()    
+        
         self.skeleton_results_olv.SetFocus()
 
     def show_all_records(self, active_row=0):
@@ -331,6 +369,7 @@ class SkeletonFrame(wx.Frame):
 
         self.panel.session = controller.connect_to_database(self.panel.db_name)
         self.SetTitle("{}: ".format(APP_NAME) + self.panel.db_name)
+        self.panel.controls_state(True)
         self.panel.show_all_records()
 
     def create_menu(self):
