@@ -226,216 +226,617 @@ class PreservationDialog(wx.Dialog):
 
         self.pg = pg = wxpg.PropertyGrid(panel, style=wxpg.PG_SPLITTER_AUTO_CENTER)
 
+        # SetPropertyValidator
+
+        # Bg Colour for 0 column
+        bgcCell = wx.Colour(219, 233, 255)
+
         # Add properties
+        # Skull
         pg.Append(wxpg.PropertyCategory("Skull inventory"))
+
         pg.Append(wxpg.IntProperty("Frontal", value=data['frontal']))
+        pg.SetPropertyCell("Frontal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Sphenoid", value=data['sphenoid']))
+        pg.SetPropertyCell("Sphenoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Mandible", value=data['mandible']))
+        pg.SetPropertyCell("Mandible", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Parietal left", value=data['parietal_l']))
+        pg.SetPropertyCell("Parietal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Parietal right", value=data['parietal_r']))
+        pg.SetPropertyCell("Parietal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Nasal left", value=data['nasal_l']))
+        pg.SetPropertyCell("Nasal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Nasal right", value=data['nasal_r']))
+        pg.SetPropertyCell("Nasal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Palatine left", value=data['palatine_l']))
+        pg.SetPropertyCell("Palatine left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Palatine right", value=data['palatine_r']))
+        pg.SetPropertyCell("Palatine right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Occipital", value=data['occipital']))
+        pg.SetPropertyCell("Occipital", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Maxilla left", value=data['maxilla_l']))
+        pg.SetPropertyCell("Maxilla left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Maxilla right", value=data['maxilla_r']))
+        pg.SetPropertyCell("Maxilla right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Lacrimal left", value=data['lacrimal_l']))
+        pg.SetPropertyCell("Lacrimal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Lacrimal right", value=data['lacrimal_r']))
+        pg.SetPropertyCell("Lacrimal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Temporal left", value=data['temporal_l']))
+        pg.SetPropertyCell("Temporal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Temporal right", value=data['temporal_r']))
+        pg.SetPropertyCell("Temporal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Zygomatic left", value=data['zygomatic_l']))
+        pg.SetPropertyCell("Zygomatic left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Zygomatic right", value=data['zygomatic_r']))
+        pg.SetPropertyCell("Zygomatic right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Orbit left", value=data['orbit_l']))
+        pg.SetPropertyCell("Orbit left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Orbit right", value=data['orbit_r']))
+        pg.SetPropertyCell("Orbit right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ethmoid", value=data['ethmoid']))
+        pg.SetPropertyCell("Ethmoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Thyroid", value=data['thyroid']))
+        pg.SetPropertyCell("Thyroid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Hyoid", value=data['hyoid']))
+        pg.SetPropertyCell("Hyoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Calotte", value=data['calotte']))
+        pg.SetPropertyCell("Calotte", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
         # Post-cranial skeleton
         pg.Append(wxpg.PropertyCategory("Post-cranial skeleton inventory"))
+
         pg.Append(wxpg.IntProperty("Ilium left", value=data['ilium_l']))
+        pg.SetPropertyCell("Ilium left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ilium right", value=data['ilium_r']))
+        pg.SetPropertyCell("Ilium right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Scapula left", value=data['scapula_l']))
+        pg.SetPropertyCell("Scapula left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Scapula right", value=data['scapula_r']))
+        pg.SetPropertyCell("Scapula right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Manubrium", value=data['manubrium']))
+        pg.SetPropertyCell("Manubrium", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ischium left", value=data['ischium_l']))
+        pg.SetPropertyCell("Ischium left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ischium right", value=data['ischium_r']))
+        pg.SetPropertyCell("Ischium right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Patella left", value=data['patella_l']))
+        pg.SetPropertyCell("Patella left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Patella right", value=data['patella_r']))
+        pg.SetPropertyCell("Patella right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("C sterni", value=data['c_sterni']))
+        pg.SetPropertyCell("C sterni", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Pubic left", value=data['pubic_l']))
+        pg.SetPropertyCell("Pubic left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Pubic right", value=data['pubic_r']))
+        pg.SetPropertyCell("Pubic right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("X process", value=data['x_process']))
+        pg.SetPropertyCell("X process", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Sacrum", value=data['sacrum']))
+        pg.SetPropertyCell("Sacrum", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Coccyx", value=data['coccyx']))
+        pg.SetPropertyCell("Coccyx", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
+        # Long bones
         pg.Append(wxpg.PropertyCategory("Long bones"))
+
         pg.Append(wxpg.IntProperty("Clavicle left D js", value=data['clavicle_l_djs']))
+        pg.SetPropertyCell("Clavicle left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle left D 1/3", value=data['clavicle_l_d13']))
+        pg.SetPropertyCell("Clavicle left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle left M 1/3", value=data['clavicle_l_m13']))
+        pg.SetPropertyCell("Clavicle left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle left P 1/3", value=data['clavicle_l_p13']))
+        pg.SetPropertyCell("Clavicle left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle left P js", value=data['clavicle_l_pjs']))
+        pg.SetPropertyCell("Clavicle left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle right D js", value=data['clavicle_r_djs']))
+        pg.SetPropertyCell("Clavicle right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle right D 1/3", value=data['clavicle_r_d13']))
+        pg.SetPropertyCell("Clavicle right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle right M 1/3", value=data['clavicle_r_m13']))
+        pg.SetPropertyCell("Clavicle right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle right P 1/3", value=data['clavicle_r_p13']))
+        pg.SetPropertyCell("Clavicle right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Clavicle right P js", value=data['clavicle_r_pjs']))
+        pg.SetPropertyCell("Clavicle right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus left D js", value=data['humerus_l_djs']))
+        pg.SetPropertyCell("Humerus left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus left D 1/3", value=data['humerus_l_d13']))
+        pg.SetPropertyCell("Humerus left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus left M 1/3", value=data['humerus_l_m13']))
+        pg.SetPropertyCell("Humerus left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus left P 1/3", value=data['humerus_l_p13']))
+        pg.SetPropertyCell("Humerus left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus left P js", value=data['humerus_l_pjs']))
+        pg.SetPropertyCell("Humerus left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus right D js", value=data['humerus_r_djs']))
+        pg.SetPropertyCell("Humerus right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus right D 1/3", value=data['humerus_r_d13']))
+        pg.SetPropertyCell("Humerus right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus right M 1/3", value=data['humerus_r_m13']))
+        pg.SetPropertyCell("Humerus right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus right P 1/3", value=data['humerus_r_p13']))
+        pg.SetPropertyCell("Humerus right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Humerus right P js", value=data['humerus_r_pjs']))
+        pg.SetPropertyCell("Humerus right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius left D js", value=data['radius_l_djs']))
+        pg.SetPropertyCell("Radius left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius left D 1/3", value=data['radius_l_d13']))
+        pg.SetPropertyCell("Radius left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius left M 1/3", value=data['radius_l_m13']))
+        pg.SetPropertyCell("Radius left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius left P 1/3", value=data['radius_l_p13']))
+        pg.SetPropertyCell("Radius left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius left P js", value=data['radius_l_pjs']))
+        pg.SetPropertyCell("Radius left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius right D js", value=data['radius_r_djs']))
+        pg.SetPropertyCell("Radius right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius right D 1/3", value=data['radius_r_d13']))
+        pg.SetPropertyCell("Radius right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius right M 1/3", value=data['radius_r_m13']))
+        pg.SetPropertyCell("Radius right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius right P 1/3", value=data['radius_r_p13']))
+        pg.SetPropertyCell("Radius right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Radius right P js", value=data['radius_r_pjs']))
+        pg.SetPropertyCell("Radius right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna left D js", value=data['ulna_l_djs']))
+        pg.SetPropertyCell("Ulna left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna left D 1/3", value=data['ulna_l_d13']))
+        pg.SetPropertyCell("Ulna left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna left M 1/3", value=data['ulna_l_m13']))
+        pg.SetPropertyCell("Ulna left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna left P 1/3", value=data['ulna_l_p13']))
+        pg.SetPropertyCell("Ulna left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna left P js", value=data['ulna_l_pjs']))
+        pg.SetPropertyCell("Ulna left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna right D js", value=data['ulna_r_djs']))
+        pg.SetPropertyCell("Ulna right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna right D 1/3", value=data['ulna_r_d13']))
+        pg.SetPropertyCell("Ulna right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna right M 1/3", value=data['ulna_r_m13']))
+        pg.SetPropertyCell("Ulna right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna right P 1/3", value=data['ulna_r_p13']))
+        pg.SetPropertyCell("Ulna right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ulna right P js", value=data['ulna_r_pjs']))
+        pg.SetPropertyCell("Ulna right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur left D js", value=data['femur_l_djs']))
+        pg.SetPropertyCell("Femur left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur left D 1/3", value=data['femur_l_d13']))
+        pg.SetPropertyCell("Femur left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur left M 1/3", value=data['femur_l_m13']))
+        pg.SetPropertyCell("Femur left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur left P 1/3", value=data['femur_l_p13']))
+        pg.SetPropertyCell("Femur left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur left P js", value=data['femur_l_pjs']))
+        pg.SetPropertyCell("Femur left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur right D js", value=data['femur_r_djs']))
+        pg.SetPropertyCell("Femur right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur right D 1/3", value=data['femur_r_d13']))
+        pg.SetPropertyCell("Femur right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur right M 1/3", value=data['femur_r_m13']))
+        pg.SetPropertyCell("Femur right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur right P 1/3", value=data['femur_r_p13']))
+        pg.SetPropertyCell("Femur right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Femur right P js", value=data['femur_r_pjs']))
+        pg.SetPropertyCell("Femur right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia left D js", value=data['tibia_l_djs']))
+        pg.SetPropertyCell("Tibia left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia left D 1/3", value=data['tibia_l_d13']))
+        pg.SetPropertyCell("Tibia left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia left M 1/3", value=data['tibia_l_m13']))
+        pg.SetPropertyCell("Tibia left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia left P 1/3", value=data['tibia_l_p13']))
+        pg.SetPropertyCell("Tibia left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia left P js", value=data['tibia_l_pjs']))
+        pg.SetPropertyCell("Tibia left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia right D js", value=data['tibia_r_djs']))
+        pg.SetPropertyCell("Tibia right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia right D 1/3", value=data['tibia_r_d13']))
+        pg.SetPropertyCell("Tibia right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia right M 1/3", value=data['tibia_r_m13']))
+        pg.SetPropertyCell("Tibia right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia right P 1/3", value=data['tibia_r_p13']))
+        pg.SetPropertyCell("Tibia right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Tibia right P js", value=data['tibia_r_pjs']))
+        pg.SetPropertyCell("Tibia right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula left D js", value=data['fibula_l_djs']))
+        pg.SetPropertyCell("Fibula left D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula left D 1/3", value=data['fibula_l_d13']))
+        pg.SetPropertyCell("Fibula left D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula left M 1/3", value=data['fibula_l_m13']))
+        pg.SetPropertyCell("Fibula left M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula left P 1/3", value=data['fibula_l_p13']))
+        pg.SetPropertyCell("Fibula left P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula left P js", value=data['fibula_l_pjs']))
+        pg.SetPropertyCell("Fibula left P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula right D js", value=data['fibula_r_djs']))
+        pg.SetPropertyCell("Fibula right D js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula right D 1/3", value=data['fibula_r_d13']))
+        pg.SetPropertyCell("Fibula right D 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula right M 1/3", value=data['fibula_r_m13']))
+        pg.SetPropertyCell("Fibula right M 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula right P 1/3", value=data['fibula_r_p13']))
+        pg.SetPropertyCell("Fibula right P 1/3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Fibula right P js", value=data['fibula_r_pjs']))
+        pg.SetPropertyCell("Fibula right P js", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals left 1st", value=data['metacarpals_l_1']))
+        pg.SetPropertyCell("Metacarpals left 1st", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals left 2nd", value=data['metacarpals_l_2']))
+        pg.SetPropertyCell("Metacarpals left 2nd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals left 3rd", value=data['metacarpals_l_3']))
+        pg.SetPropertyCell("Metacarpals left 3rd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals left 4th", value=data['metacarpals_l_4']))
+        pg.SetPropertyCell("Metacarpals left 4th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals left 5th", value=data['metacarpals_l_5']))
+        pg.SetPropertyCell("Metacarpals left 5th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals right 1st", value=data['metacarpals_r_1']))
+        pg.SetPropertyCell("Metacarpals right 1st", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals right 2nd", value=data['metacarpals_r_2']))
+        pg.SetPropertyCell("Metacarpals right 2nd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals right 3rd", value=data['metacarpals_r_3']))
+        pg.SetPropertyCell("Metacarpals right 3rd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals right 4th", value=data['metacarpals_r_4']))
+        pg.SetPropertyCell("Metacarpals right 4th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metacarpals right 5th", value=data['metacarpals_r_5']))
+        pg.SetPropertyCell("Metacarpals right 5th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals left 1st", value=data['metatarsals_l_1']))
+        pg.SetPropertyCell("Metatarsals left 1st", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals left 2nd", value=data['metatarsals_l_2']))
+        pg.SetPropertyCell("Metatarsals left 2nd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals left 3rd", value=data['metatarsals_l_3']))
+        pg.SetPropertyCell("Metatarsals left 3rd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals left 4th", value=data['metatarsals_l_4']))
+        pg.SetPropertyCell("Metatarsals left 4th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals left 5th", value=data['metatarsals_l_5']))
+        pg.SetPropertyCell("Metatarsals left 5th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals right 1st", value=data['metatarsals_r_1']))
+        pg.SetPropertyCell("Metatarsals right 1st", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals right 2nd", value=data['metatarsals_r_2']))
+        pg.SetPropertyCell("Metatarsals right 2nd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals right 3rd", value=data['metatarsals_r_3']))
+        pg.SetPropertyCell("Metatarsals right 3rd", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals right 4th", value=data['metatarsals_r_4']))
+        pg.SetPropertyCell("Metatarsals right 4th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Metatarsals right 5th", value=data['metatarsals_r_5']))
+        pg.SetPropertyCell("Metatarsals right 5th", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
+        # Vertebrae
         pg.Append(wxpg.PropertyCategory("Vertebrae"))
+
         pg.Append(wxpg.IntProperty("Vertebrae C 1", value=data['vertebrae_c_1']))
+        pg.SetPropertyCell("Vertebrae C 1", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae C 2", value=data['vertebrae_c_2']))
+        pg.SetPropertyCell("Vertebrae C 2", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae C 3", value=data['vertebrae_c_3']))
+        pg.SetPropertyCell("Vertebrae C 3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae C 4", value=data['vertebrae_c_4']))
+        pg.SetPropertyCell("Vertebrae C 4", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae C 5", value=data['vertebrae_c_5']))
+        pg.SetPropertyCell("Vertebrae C 5", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae T 1", value=data['vertebrae_t_1']))
+        pg.SetPropertyCell("Vertebrae T 1", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae T 2", value=data['vertebrae_t_2']))
+        pg.SetPropertyCell("Vertebrae T 2", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae T 3", value=data['vertebrae_t_3']))
+        pg.SetPropertyCell("Vertebrae T 3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae T 4", value=data['vertebrae_t_4']))
+        pg.SetPropertyCell("Vertebrae T 4", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae T 5", value=data['vertebrae_t_5']))
+        pg.SetPropertyCell("Vertebrae T 5", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae L 1", value=data['vertebrae_l_1']))
+        pg.SetPropertyCell("Vertebrae L 1", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae L 2", value=data['vertebrae_l_2']))
+        pg.SetPropertyCell("Vertebrae L 2", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae L 3", value=data['vertebrae_l_3']))
+        pg.SetPropertyCell("Vertebrae L 3", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae L 4", value=data['vertebrae_l_4']))
+        pg.SetPropertyCell("Vertebrae L 4", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Vertebrae L 5", value=data['vertebrae_l_5']))
+        pg.SetPropertyCell("Vertebrae L 5", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.StringProperty("Vertebrae remarks", value=data['vertebrae_remarks']))
+        pg.SetPropertyCell("Vertebrae remarks", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
+        # Ribs
         pg.Append(wxpg.PropertyCategory("Ribs"))
+
         pg.Append(wxpg.IntProperty("Ribs left whole", value=data['ribs_l_whole']))
+        pg.SetPropertyCell("Ribs left whole", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs left S end", value=data['ribs_l_send']))
+        pg.SetPropertyCell("Ribs left S end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs left V end", value=data['ribs_l_vend']))
+        pg.SetPropertyCell("Ribs left V end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs left Frag.", value=data['ribs_l_frag']))
+        pg.SetPropertyCell("Ribs left Frag.", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs right whole", value=data['ribs_r_whole']))
+        pg.SetPropertyCell("Ribs right whole", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs right S end", value=data['ribs_r_send']))
+        pg.SetPropertyCell("Ribs right S end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs right V end", value=data['ribs_r_vend']))
+        pg.SetPropertyCell("Ribs right V end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs right Frag.", value=data['ribs_r_frag']))
+        pg.SetPropertyCell("Ribs right Frag.", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs unknown whole", value=data['ribs_u_whole']))
+        pg.SetPropertyCell("Ribs unknown whole", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs unknown S end", value=data['ribs_u_send']))
+        pg.SetPropertyCell("Ribs unknown S end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs unknown V end", value=data['ribs_u_vend']))
+        pg.SetPropertyCell("Ribs unknown V end", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Ribs unknown Frag.", value=data['ribs_u_frag']))
+        pg.SetPropertyCell("Ribs unknown Frag.", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
+        # Phalanges
         pg.Append(wxpg.PropertyCategory("Phalanges"))
-        pg.Append(wxpg.IntProperty("Phalanges hand proximal", value=data['phalanges_hand_p']))
-        pg.Append(wxpg.IntProperty("Phalanges hand medial", value=data['phalanges_hand_m']))
-        pg.Append(wxpg.IntProperty("Phalanges hand distal", value=data['phalanges_hand_d']))
-        pg.Append(wxpg.IntProperty("Phalanges foot proximal", value=data['phalanges_foot_p']))
-        pg.Append(wxpg.IntProperty("Phalanges foot medial", value=data['phalanges_foot_m']))
-        pg.Append(wxpg.IntProperty("Phalanges foot distal", value=data['phalanges_foot_d']))
 
+        pg.Append(wxpg.IntProperty("Phalanges hand proximal", value=data['phalanges_hand_p']))
+        pg.SetPropertyCell("Phalanges hand proximal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        pg.Append(wxpg.IntProperty("Phalanges hand medial", value=data['phalanges_hand_m']))
+        pg.SetPropertyCell("Phalanges hand medial", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        pg.Append(wxpg.IntProperty("Phalanges hand distal", value=data['phalanges_hand_d']))
+        pg.SetPropertyCell("Phalanges hand distal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        pg.Append(wxpg.IntProperty("Phalanges foot proximal", value=data['phalanges_foot_p']))
+        pg.SetPropertyCell("Phalanges foot proximal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        pg.Append(wxpg.IntProperty("Phalanges foot medial", value=data['phalanges_foot_m']))
+        pg.SetPropertyCell("Phalanges foot medial", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        pg.Append(wxpg.IntProperty("Phalanges foot distal", value=data['phalanges_foot_d']))
+        pg.SetPropertyCell("Phalanges foot distal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
+        # Carpals - tarsals
         pg.Append(wxpg.PropertyCategory("Carpals - tarsals"))
+
         pg.Append(wxpg.IntProperty("Scaphoid left", value=data['scaphoid_l']))
+        pg.SetPropertyCell("Scaphoid left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Scaphoid right", value=data['scaphoid_r']))
+        pg.SetPropertyCell("Scaphoid right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Lunate left", value=data['lunate_l']))
+        pg.SetPropertyCell("Lunate left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Lunate right", value=data['lunate_r']))
+        pg.SetPropertyCell("Lunate right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Triquetral left", value=data['triquetral_l']))
+        pg.SetPropertyCell("Triquetral left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Triquetral right", value=data['triquetral_r']))
+        pg.SetPropertyCell("Triquetral right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Pisiform left", value=data['pisiform_l']))
+        pg.SetPropertyCell("Pisiform left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Pisiform right", value=data['pisiform_r']))
+        pg.SetPropertyCell("Pisiform right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Trapezium left", value=data['trapezium_l']))
+        pg.SetPropertyCell("Trapezium left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Trapezium right", value=data['trapezium_r']))
+        pg.SetPropertyCell("Trapezium right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Trapezoid left", value=data['trapezoid_l']))
+        pg.SetPropertyCell("Trapezoid left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Trapezoid right", value=data['trapezoid_r']))
+        pg.SetPropertyCell("Trapezoid right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Capitate left", value=data['capitate_l']))
+        pg.SetPropertyCell("Capitate left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Capitate right", value=data['capitate_r']))
+        pg.SetPropertyCell("Capitate right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Hamate left", value=data['hamate_l']))
+        pg.SetPropertyCell("Hamate left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Hamate right", value=data['hamate_r']))
+        pg.SetPropertyCell("Hamate right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Sesamoids hand", value=data['sesamoids_hand']))
+        pg.SetPropertyCell("Sesamoids hand", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Talus left", value=data['talus_l']))
+        pg.SetPropertyCell("Talus left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Talus right", value=data['talus_r']))
+        pg.SetPropertyCell("Talus right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Calcaneus left", value=data['calcaneus_l']))
+        pg.SetPropertyCell("Calcaneus left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Calcaneus right", value=data['calcaneus_r']))
+        pg.SetPropertyCell("Calcaneus right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("1st Cun left", value=data['cun_1_l']))
+        pg.SetPropertyCell("1st Cun left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("1st Cun right", value=data['cun_1_r']))
+        pg.SetPropertyCell("1st Cun right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("2nd Cun left", value=data['cun_2_l']))
+        pg.SetPropertyCell("2nd Cun left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("2nd Cun right", value=data['cun_2_r']))
+        pg.SetPropertyCell("2nd Cun right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("3rd Cun left", value=data['cun_3_l']))
+        pg.SetPropertyCell("3rd Cun left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("3rd Cun right", value=data['cun_3_r']))
+        pg.SetPropertyCell("3rd Cun right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Navicular left", value=data['navicular_l']))
+        pg.SetPropertyCell("Navicular left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Navicular right", value=data['navicular_r']))
+        pg.SetPropertyCell("Navicular right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Cuboid left", value=data['cuboid_l']))
+        pg.SetPropertyCell("Cuboid left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Cuboid right", value=data['cuboid_r']))
+        pg.SetPropertyCell("Cuboid right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
+
         pg.Append(wxpg.IntProperty("Sesamoids foot", value=data['sesamoids_foot']))
+        pg.SetPropertyCell("Sesamoids foot", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
         topsizer.Add(pg, 1, wx.EXPAND)
 
