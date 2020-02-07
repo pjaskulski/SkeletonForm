@@ -8,8 +8,9 @@ Windows:
 
 Linux (Ubuntu 18.04):
 
-![Screen](/doc/screen_linux.png)
-
  * pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
  * apt install libsdl1.2debian
  
+ ![Screen](/doc/screen_linux.png)
+ 
+ ![Screen](/doc/screen_linux2.png)

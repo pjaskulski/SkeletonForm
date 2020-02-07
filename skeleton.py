@@ -281,7 +281,7 @@ class SkeletonPanel(wx.Panel):
         report = SheetExport()
         result = report.export_sheet(filename, data)
         if result != '':
-            dialogs.show_message('Problems occurred during the creation of the report:\n{}'.format(e), 'Error')
+            dialogs.show_message('Problems occurred during the creation of the report:\n{}'.format(result), 'Error')
 
         self.skeleton_results_olv.SetFocus()
 
@@ -319,7 +319,8 @@ class SkeletonPanel(wx.Panel):
                        "obs_date", isSpaceFilling=True, minimumWidth=50)
         ])
         self.skeleton_results_olv.SetObjects(self.skeleton_results)
-        self.skeleton_results_olv.Select(active_row)
+        if self.skeleton_results_olv.GetItemCount() > 0:
+            self.skeleton_results_olv.Select(active_row)
         self.skeleton_results_olv.SetFocus()
 
 

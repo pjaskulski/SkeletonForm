@@ -92,6 +92,7 @@ class RecordDialog(wx.Dialog):
                                             mask="####-##-##",
                                             defaultValue=obs_date,
                                             validRequired=False,
+                                            size=(200, -1),
                                             style=wx.TE_PROCESS_ENTER)
         self.obs_date_txt.SetMaxLength(10)
         self.obs_date_txt.Bind(wx.EVT_TEXT_ENTER, self.onEnter)

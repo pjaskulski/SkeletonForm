@@ -10,6 +10,7 @@ from reportlab.graphics import renderPDF, renderPM
 from svglib.svglib import svg2rlg
 from lxml import etree
 import os
+import platform
 
 
 class SheetExport():
@@ -19,7 +20,15 @@ class SheetExport():
         doc = SimpleDocTemplate(filename, pagesize=A4)
         elements = []
 
-        pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
+        current_os = platform.system().lower()
+        if current_os == 'windows':
+            pdfmetrics.registerFont(TTFont('Arial', 'arial.ttf'))
+            font_name = 'Arial'
+        elif current_os == 'linux':
+            pdfmetrics.registerFont(TTFont('Ubuntu', 'Ubuntu-R.ttf'))
+            font_name = 'Ubuntu'
+        else:
+            font_name = 'Helvetica'
 
         elements.append(Paragraph("Skeleton form - adult inventory",
                                   styleSheet['Title']))
@@ -43,7 +52,7 @@ class SheetExport():
                                ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
                                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
                                ('SPAN', (1, 0), (3, 0)),
-                               ('FONTNAME', (0, 0), (-1, -1), 'Arial')
+                               ('FONTNAME', (0, 0), (-1, -1), font_name)
                                ]))
 
         t._argW[0] = 25 * mm
@@ -128,7 +137,7 @@ class SheetExport():
                                ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
                                ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
                                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-                               ('FONTNAME', (0, 0), (-1, -1), 'Arial'),
+                               ('FONTNAME', (0, 0), (-1, -1), font_name),
                                ('SPAN', (1, 1), (2, 1)),
                                ('SPAN', (4, 1), (5, 1)),
                                ('SPAN', (7, 1), (8, 1)),
@@ -166,7 +175,7 @@ class SheetExport():
         try:
             doc.build(elements)
         except Exception as e:
-            result = '{}'.format(e)
+            result = '{}, {}'.format(e.message, e.args)
         else:
             result = ''
         finally:
