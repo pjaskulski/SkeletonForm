@@ -123,6 +123,10 @@ def edit_preservation(session, id_num, data):
     data - dictionary: {'forntal': 1}
     """
 
+    for k, v in data.items():
+        if v == -1:
+            data[k] = None
+
     record = session.query(Skeleton).filter_by(skeleton_id=id_num).update(data)
 
     session.flush()

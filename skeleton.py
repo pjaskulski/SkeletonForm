@@ -245,7 +245,7 @@ class SkeletonPanel(wx.Panel):
         """
         filename = ""
         wildcard = "PDF files (*.pdf)|*.pdf"
-        with wx.FileDialog(None, "Create a report", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
+        with wx.FileDialog(self, "Create a report", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 filename = dialog.GetPath()
 
@@ -264,30 +264,31 @@ class SkeletonPanel(wx.Panel):
         data['skeleton'] = rekord.skeleton
         data['observer'] = rekord.observer
         data['obs_date'] = rekord.obs_date
-        data['frontal'] = rekord.frontal if rekord.frontal != None else 0
-        data['sphenoid'] = rekord.sphenoid if rekord.sphenoid != None else 0
-        data['mandible'] = rekord.mandible if rekord.mandible != None else 0
-        data['ethmoid'] = rekord.ethmoid if rekord.ethmoid != None else 0
-        data['parietal_l'] = rekord.parietal_l if rekord.parietal_l != None else 0
-        data['parietal_r'] = rekord.parietal_r if rekord.parietal_r != None else 0
-        data['nasal_l'] = rekord.nasal_l if rekord.nasal_l != None else 0
-        data['nasal_r'] = rekord.nasal_r if rekord.nasal_r != None else 0
-        data['palatine_l'] = rekord.palatine_l if rekord.palatine_l != None else 0
-        data['palatine_r'] = rekord.palatine_r if rekord.palatine_r != None else 0
-        data['thyroid'] = rekord.thyroid if rekord.thyroid != None else 0
-        data['occipital'] = rekord.occipital if rekord.occipital != None else 0
-        data['maxilla_l'] = rekord.maxilla_l if rekord.maxilla_l != None else 0
-        data['maxilla_r'] = rekord.maxilla_r if rekord.maxilla_r != None else 0
-        data['lacrimal_l'] = rekord.lacrimal_l if rekord.lacrimal_l != None else 0
-        data['lacrimal_r'] = rekord.lacrimal_r if rekord.lacrimal_r != None else 0
-        data['hyoid'] = rekord.hyoid if rekord.hyoid != None else 0
-        data['temporal_l'] = rekord.temporal_l if rekord.temporal_l != None else 0
-        data['temporal_r'] = rekord.temporal_r if rekord.temporal_r != None else 0
-        data['zygomatic_l'] = rekord.zygomatic_l if rekord.zygomatic_l != None else 0
-        data['zygomatic_r'] = rekord.zygomatic_r if rekord.zygomatic_r != None else 0
-        data['orbit_l'] = rekord.orbit_l if rekord.orbit_l != None else 0
-        data['orbit_r'] = rekord.orbit_r if rekord.orbit_r != None else 0
-        data['calotte'] = rekord.calotte if rekord.calotte != None else 0
+        # rekord.frontal if rekord.frontal != None else 0
+        data['frontal'] = rekord.frontal
+        data['sphenoid'] = rekord.sphenoid
+        data['mandible'] = rekord.mandible
+        data['ethmoid'] = rekord.ethmoid
+        data['parietal_l'] = rekord.parietal_l
+        data['parietal_r'] = rekord.parietal_r
+        data['nasal_l'] = rekord.nasal_l
+        data['nasal_r'] = rekord.nasal_r
+        data['palatine_l'] = rekord.palatine_l
+        data['palatine_r'] = rekord.palatine_r
+        data['thyroid'] = rekord.thyroid
+        data['occipital'] = rekord.occipital
+        data['maxilla_l'] = rekord.maxilla_l
+        data['maxilla_r'] = rekord.maxilla_r
+        data['lacrimal_l'] = rekord.lacrimal_l
+        data['lacrimal_r'] = rekord.lacrimal_r
+        data['hyoid'] = rekord.hyoid
+        data['temporal_l'] = rekord.temporal_l
+        data['temporal_r'] = rekord.temporal_r
+        data['zygomatic_l'] = rekord.zygomatic_l
+        data['zygomatic_r'] = rekord.zygomatic_r
+        data['orbit_l'] = rekord.orbit_l
+        data['orbit_r'] = rekord.orbit_r
+        data['calotte'] = rekord.calotte
 
         report = SheetExport()
         result = report.export_sheet(filename, data)

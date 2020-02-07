@@ -87,7 +87,7 @@ class RecordDialog(wx.Dialog):
         obs_date_lbl = wx.StaticText(
             self, label="Date:", size=size)
         obs_date_lbl.SetFont(font)
-        #self.obs_date_txt = wx.TextCtrl(self, value=obs_date, style=wx.TE_PROCESS_ENTER)
+
         self.obs_date_txt = masked.TextCtrl(self, -1, "",
                                             mask="####-##-##",
                                             defaultValue=obs_date,
@@ -171,8 +171,6 @@ class RecordDialog(wx.Dialog):
         self.selected_row.skeleton = self.skeleton_dict['skeleton']
         self.selected_row.observer = self.skeleton_dict['observer']
         self.selected_row.obs_date = self.skeleton_dict['obs_date']
-        # show_message("Skeleton edited successfully!",
-        #             "Success", wx.ICON_INFORMATION)
         self.Close()
 
     def on_record(self, event):
@@ -218,7 +216,7 @@ class PreservationDialog(wx.Dialog):
         data['vertebrae_remarks'] = rekord.vertebrae_remarks if rekord.vertebrae_remarks != None else ''
         for k, v in data.items():
             if v is None:
-                data[k] = 0
+                data[k] = -1
 
         # GUI project
         self.panel = panel = wx.Panel(self, wx.ID_ANY)

@@ -200,14 +200,15 @@ class SheetExport():
                 # print(el.tag)
                 # print(el.attrib)
                 attributes = el.attrib
-                attributes["style"] = colors[bone[id]] + ";fill-opacity:1"
-                if len(el) > 0:
-                    for item in el:
-                        item_attr = item.attrib
-                        styl = item_attr["style"]
-                        if "fill:#ffffff" in styl:
-                            styl = styl.replace('fill:#ffffff', colors[bone[id]])
-                        item_attr["style"] = styl
+                if bone[id] != None and bone[id] >= 0:
+                    attributes["style"] = colors[bone[id]] + ";fill-opacity:1"
+                    if len(el) > 0:
+                        for item in el:
+                            item_attr = item.attrib
+                            styl = item_attr["style"]
+                            if "fill:#ffffff" in styl:
+                                styl = styl.replace('fill:#ffffff', colors[bone[id]])
+                            item_attr["style"] = styl
 
         with open(file_out + '.svg', 'w') as f:
             f.write('<?xml version="1.0" encoding="UTF-8"?>\n' +
