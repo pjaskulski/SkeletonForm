@@ -133,6 +133,3 @@ dmypy.json
 
 # Wing IDE project
 *.wpr
-
-# build utils 
-utils/

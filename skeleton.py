@@ -38,8 +38,13 @@ class SkeletonPanel(wx.Panel):
         search_sizer.Add(search_label, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 5)
         search_sizer.AddSpacer(5)
 
-        self.categories = wx.ComboBox(
-            self, value="Skeleton", choices=categories, style=wx.CB_READONLY)
+        if platform.system().lower() == 'linux':
+            self.categories = wx.ComboBox(
+                self, value="Skeleton", choices=categories, style=wx.CB_READONLY, size=(150, -1))
+        else:
+            self.categories = wx.ComboBox(
+                self, value="Skeleton", choices=categories, style=wx.CB_READONLY)
+
         search_sizer.Add(self.categories, 0, wx.ALL, 5)
 
         search_sizer.AddSpacer(5)
@@ -104,11 +109,11 @@ class SkeletonPanel(wx.Panel):
         self.delete_record_btn.Enable(state)
         self.report_btn.Enable(state)
         self.show_all_btn.Enable(state)
-        # self.search_ctrl.Enable(state)
+        self.search_ctrl.Enable(state)
 
     def on_open_file(self, event):
         wildcard = "DATABASE files (*.db)|*.db"
-        with wx.FileDialog(None, "Choose a file", wildcard=wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as dialog:
+        with wx.FileDialog(self, "Choose a file", wildcard=wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 self.db_name = dialog.GetPath()
                 # zapis w ostatnio używanych plikach
@@ -127,7 +132,7 @@ class SkeletonPanel(wx.Panel):
 
     def on_create_file(self, event):
         wildcard = "DATABASE files (*.db)|*.db"
-        with wx.FileDialog(None, "Create a file", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
+        with wx.FileDialog(self, "Create a file", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 self.db_name = dialog.GetPath()
                 # zapis w ostatnio używanych plikach
