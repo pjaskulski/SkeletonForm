@@ -193,6 +193,66 @@ class RecordDialog(wx.Dialog):
         return sizer
 
 
+class IntProperty2(wxpg.PGProperty):
+    """\
+    This is a simple re-implementation of wxIntProperty.
+    """
+
+    def __init__(self, label, name=wxpg.PG_LABEL, value=-1):
+        wxpg.PGProperty.__init__(self, label, name)
+        self.SetValue(value)
+
+    def GetClassName(self):
+        """\
+        This is not 100% necessary and in future is probably going to be
+        automated to return class name.
+        """
+        return "IntProperty2"
+
+    def DoGetEditorClass(self):
+        return wxpg.PropertyGridInterface.GetEditorByName("TextCtrl")
+
+    def ValueToString(self, value, flags):
+        return str(value)
+
+    def StringToValue(self, s, flags):
+        """ If failed, return False or (False, None). If success, return tuple
+            (True, newValue).
+        """
+        try:
+            v = int(s)
+            if self.GetValue() != v:
+                return (True, v)
+        except (ValueError, TypeError):
+            if flags & wxpg.PG_REPORT_ERROR:
+                wx.MessageBox("Cannot convert '%s' into a number." % s, "Error")
+        return (False, None)
+
+    def IntToValue(self, v, flags):
+        """ If failed, return False or (False, None). If success, return tuple
+            (True, newValue).
+        """
+        if (self.GetValue() != v):
+            return (True, v)
+
+        return (False, None)
+
+    def ValidateValue(self, value, validationInfo):
+        """ Let's limit the value to range -1 and 4.
+        """
+        # Just test this function to make sure validationInfo and
+        # wxPGVFBFlags work properly.
+        oldvfb__ = validationInfo.GetFailureBehavior()
+
+        # Mark the cell if validation failed
+        # validationInfo.SetFailureBehavior(wxpg.PG_VFB_MARK_CELL)
+
+        if value == None or value < -1 or value > 4:
+            return False
+
+        return True
+
+
 class PreservationDialog(wx.Dialog):
     """
     dialog for edit state of preservation
@@ -233,73 +293,73 @@ class PreservationDialog(wx.Dialog):
         # Skull
         pg.Append(wxpg.PropertyCategory("Skull inventory"))
 
-        pg.Append(wxpg.IntProperty("Frontal", value=data['frontal']))
+        pg.Append(IntProperty2("Frontal", value=data['frontal']))
         pg.SetPropertyCell("Frontal", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Sphenoid", value=data['sphenoid']))
+        pg.Append(IntProperty2("Sphenoid", value=data['sphenoid']))
         pg.SetPropertyCell("Sphenoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Mandible", value=data['mandible']))
+        pg.Append(IntProperty2("Mandible", value=data['mandible']))
         pg.SetPropertyCell("Mandible", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Parietal left", value=data['parietal_l']))
+        pg.Append(IntProperty2("Parietal left", value=data['parietal_l']))
         pg.SetPropertyCell("Parietal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Parietal right", value=data['parietal_r']))
+        pg.Append(IntProperty2("Parietal right", value=data['parietal_r']))
         pg.SetPropertyCell("Parietal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Nasal left", value=data['nasal_l']))
+        pg.Append(IntProperty2("Nasal left", value=data['nasal_l']))
         pg.SetPropertyCell("Nasal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Nasal right", value=data['nasal_r']))
+        pg.Append(IntProperty2("Nasal right", value=data['nasal_r']))
         pg.SetPropertyCell("Nasal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Palatine left", value=data['palatine_l']))
+        pg.Append(IntProperty2("Palatine left", value=data['palatine_l']))
         pg.SetPropertyCell("Palatine left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Palatine right", value=data['palatine_r']))
+        pg.Append(IntProperty2("Palatine right", value=data['palatine_r']))
         pg.SetPropertyCell("Palatine right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Occipital", value=data['occipital']))
+        pg.Append(IntProperty2("Occipital", value=data['occipital']))
         pg.SetPropertyCell("Occipital", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Maxilla left", value=data['maxilla_l']))
+        pg.Append(IntProperty2("Maxilla left", value=data['maxilla_l']))
         pg.SetPropertyCell("Maxilla left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Maxilla right", value=data['maxilla_r']))
+        pg.Append(IntProperty2("Maxilla right", value=data['maxilla_r']))
         pg.SetPropertyCell("Maxilla right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Lacrimal left", value=data['lacrimal_l']))
+        pg.Append(IntProperty2("Lacrimal left", value=data['lacrimal_l']))
         pg.SetPropertyCell("Lacrimal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Lacrimal right", value=data['lacrimal_r']))
+        pg.Append(IntProperty2("Lacrimal right", value=data['lacrimal_r']))
         pg.SetPropertyCell("Lacrimal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Temporal left", value=data['temporal_l']))
+        pg.Append(IntProperty2("Temporal left", value=data['temporal_l']))
         pg.SetPropertyCell("Temporal left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Temporal right", value=data['temporal_r']))
+        pg.Append(IntProperty2("Temporal right", value=data['temporal_r']))
         pg.SetPropertyCell("Temporal right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Zygomatic left", value=data['zygomatic_l']))
+        pg.Append(IntProperty2("Zygomatic left", value=data['zygomatic_l']))
         pg.SetPropertyCell("Zygomatic left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Zygomatic right", value=data['zygomatic_r']))
+        pg.Append(IntProperty2("Zygomatic right", value=data['zygomatic_r']))
         pg.SetPropertyCell("Zygomatic right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Orbit left", value=data['orbit_l']))
+        pg.Append(IntProperty2("Orbit left", value=data['orbit_l']))
         pg.SetPropertyCell("Orbit left", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Orbit right", value=data['orbit_r']))
+        pg.Append(IntProperty2("Orbit right", value=data['orbit_r']))
         pg.SetPropertyCell("Orbit right", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Ethmoid", value=data['ethmoid']))
+        pg.Append(IntProperty2("Ethmoid", value=data['ethmoid']))
         pg.SetPropertyCell("Ethmoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Thyroid", value=data['thyroid']))
+        pg.Append(IntProperty2("Thyroid", value=data['thyroid']))
         pg.SetPropertyCell("Thyroid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
-        pg.Append(wxpg.IntProperty("Hyoid", value=data['hyoid']))
+        pg.Append(IntProperty2("Hyoid", value=data['hyoid']))
         pg.SetPropertyCell("Hyoid", 0, text=wx.propgrid.PG_LABEL, bgCol=bgcCell)
 
         pg.Append(wxpg.IntProperty("Calotte", value=data['calotte']))
@@ -839,10 +899,10 @@ class PreservationDialog(wx.Dialog):
         topsizer.Add(pg, 1, wx.EXPAND)
 
         rowsizer = wx.BoxSizer(wx.HORIZONTAL)
-        btn_ok = wx.Button(panel, -1, "Save")
+        btn_ok = wx.Button(panel, -1, "&Save")
         btn_ok.Bind(wx.EVT_BUTTON, self.on_save_preservation)
         rowsizer.Add(btn_ok, 1)
-        btn_cancel = wx.Button(panel, wx.ID_CANCEL, "Cancel")
+        btn_cancel = wx.Button(panel, -1, "&Cancel")
         btn_cancel.Bind(wx.EVT_BUTTON, self.on_cancel_preservation)
         rowsizer.Add(btn_cancel, 1)
         topsizer.Add(rowsizer, 0, wx.EXPAND)
