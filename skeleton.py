@@ -2,6 +2,7 @@ import wx
 import os
 import controller
 import dialogs
+import platform
 from ObjectListView import ObjectListView, ColumnDefn
 from wx.lib.wordwrap import wordwrap
 from model import olvSkeleton
@@ -42,7 +43,12 @@ class SkeletonPanel(wx.Panel):
         search_sizer.Add(self.categories, 0, wx.ALL, 5)
 
         search_sizer.AddSpacer(5)
-        self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER, size=(200, -1))
+
+        if platform.system().lower() == 'linux':
+            self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER, size=(200, 27))
+        else:
+            self.search_ctrl = wx.SearchCtrl(self, style=wx.TE_PROCESS_ENTER, size=(200, -1))
+
         # self.search_ctrl.ShowCancelButton(True)
         self.search_ctrl.SetDescriptiveText('Filter')
         self.search_ctrl.Bind(wx.EVT_TEXT_ENTER, self.search)
