@@ -124,7 +124,7 @@ def edit_preservation(session, id_num, data):
     """
 
     for k, v in data.items():
-        if v == -1:
+        if v < 0:
             data[k] = None
 
     record = session.query(Skeleton).filter_by(skeleton_id=id_num).update(data)
