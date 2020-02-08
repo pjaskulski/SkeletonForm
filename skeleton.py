@@ -161,7 +161,9 @@ class SkeletonPanel(wx.Panel):
         with wx.FileDialog(self, "Export to XLSX", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
             if dialog.ShowModal() == wx.ID_OK:
                 self.xlsx_name = dialog.GetPath()
-                controller.export_xlsx(self.session, self.xlsx_name)
+                result = controller.export_xlsx(self.session, self.xlsx_name)
+                if result != '':
+                    dialogs.show_message(result, 'Error')
 
         self.skeleton_results_olv.SetFocus()
 

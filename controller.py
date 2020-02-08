@@ -6,7 +6,7 @@ import xlsxwriter
 
 def add_record(session, data):
     """
-    session - 
+    session -
     data - dictionary {"site":"Warsaw"}
     """
     skeleton = Skeleton()
@@ -63,8 +63,8 @@ def delete_record(session, id_num):
 
 
 def edit_record(session, id_num, row):
-    """ 
-    Edit a record 
+    """
+    Edit a record
     row - dictionary: {"site":"Warsaw"}
     """
 
@@ -119,8 +119,8 @@ def find_skeleton(session, skeleton_id):
 
 
 def edit_preservation(session, id_num, data):
-    """ 
-    Edit a record 
+    """
+    Edit a record
     data - dictionary: {'forntal': 1}
     """
 
@@ -138,13 +138,34 @@ def export_xlsx(session, filename):
     """ export data to xlsx file """
     workbook = xlsxwriter.Workbook(filename)
     worksheet = workbook.add_worksheet()
-
     bold = workbook.add_format({'bold': True})
 
-    worksheet.write('A1', 'Hello')
-    worksheet.write('A2', 'World', bold)
+    columns = [m.key for m in Skeleton.__table__.columns]
 
-    worksheet.write(2, 0, 123)
-    worksheet.write(3, 0, 123.456)
+    lp = 0
+    escape = ['skeleton_id', 'skeleton_description']
+    for item in columns:
+        if item not in escape:
+            worksheet.write(0, lp, item, bold)
+            lp += 1
 
-    workbook.close()
+    result = session.query(Skeleton).all()
+    rec_nr = 1
+    col_nr = 0
+    for record in result:
+        rec_dict = dict((col, getattr(record, col)) for col in Skeleton.__table__.columns.keys())
+        for key, value in rec_dict.items():
+            # row, column
+            if key not in escape:
+                worksheet.write(rec_nr, col_nr, value)
+                col_nr += 1
+
+        col_nr = 0
+        rec_nr += 1
+
+    try:
+        workbook.close()
+    except Exception as e:
+        return('Error while saving xlsx file: {}.'.format(e))
+    else:
+        return ''
