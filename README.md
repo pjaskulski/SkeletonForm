@@ -1,6 +1,6 @@
 # SkeletonForm
 A simple database to record the state of skeletons from archaeological research and create a graphical report on the state of preservation.
-Python 3 + wxPython 4.07 + SQLAlchemy 1.3.13  ReportLab 3.5.34.
+Python 3 + wxPython 4.07 + SQLAlchemy 1.3.13 + ReportLab 3.5.34 + XlsxWriter 1.2.7.
 
 The application uses ObjectListView, in this object is known problem (https://stackoverflow.com/questions/29302875/typeerror-in-string-requires-string-as-left-operand-not-int-with-objectlis )
 , line 1457 in the ObjectListView.py file should be modified according to the suggestion.
@@ -21,3 +21,9 @@ Linux (Ubuntu 18.04):
  ![Screen](/doc/screen_linux.png)
  
  ![Screen](/doc/screen_linux2.png)
+ 
+ Skull report example:
+ 
+ ![Screen](/doc/skull_report.png)
+ 
+ 

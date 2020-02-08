@@ -1,6 +1,7 @@
 from model import Skeleton, olvSkeleton, metadata
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import xlsxwriter
 
 
 def add_record(session, data):
@@ -131,3 +132,19 @@ def edit_preservation(session, id_num, data):
 
     session.flush()
     session.commit()
+
+
+def export_xlsx(session, filename):
+    """ export data to xlsx file """
+    workbook = xlsxwriter.Workbook(filename)
+    worksheet = workbook.add_worksheet()
+
+    bold = workbook.add_format({'bold': True})
+
+    worksheet.write('A1', 'Hello')
+    worksheet.write('A2', 'World', bold)
+
+    worksheet.write(2, 0, 123)
+    worksheet.write(3, 0, 123.456)
+
+    workbook.close()

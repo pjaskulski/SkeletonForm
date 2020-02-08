@@ -149,6 +149,22 @@ class SkeletonPanel(wx.Panel):
                 self.controls_state(True)
                 self.show_all_records()
 
+    def on_export_file(self, event):
+        """ 
+        export db to xlsx 
+        """
+        if self.session == None:
+            dialogs.show_message('No data available for export.', 'Error')
+            return
+
+        wildcard = "XLSX files (*.xlsx)|*.xlsx"
+        with wx.FileDialog(self, "Export to XLSX", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
+            if dialog.ShowModal() == wx.ID_OK:
+                self.xlsx_name = dialog.GetPath()
+                controller.export_xlsx(self.session, self.xlsx_name)
+
+        self.skeleton_results_olv.SetFocus()
+
     def add_record(self, event):
         """
         Add a record to the database
@@ -240,9 +256,35 @@ class SkeletonPanel(wx.Panel):
         self.update_skeleton_results(active_row)
 
     def create_report(self, event):
+        """ select report """
+        dlg = wx.SingleChoiceDialog(
+            self, 'Select report:', 'Create report',
+            ['Skull report', 'Skull report - SVG', 'Inventory sheet', 'Full report'],
+            wx.CHOICEDLG_STYLE
+        )
+
+        if dlg.ShowModal() == wx.ID_OK:
+            selected = dlg.GetStringSelection()
+        else:
+            selected = ''
+
+        dlg.Destroy()
+
+        if selected == '':
+            return
+
+        if selected == 'Skull report':
+            self.create_report_skull()
+        elif selected == 'Skull report - SVG':
+            self.create_report_skull_svg()
+        else:
+            dialogs.show_message('Sorry, report "{}" not ready yet.'.format(selected), 'Error')
+
+    def create_report_skull(self):
         """
         generating a skeleton report
         """
+
         filename = ""
         wildcard = "PDF files (*.pdf)|*.pdf"
         with wx.FileDialog(self, "Create a report", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
@@ -294,6 +336,64 @@ class SkeletonPanel(wx.Panel):
         result = report.export_sheet(filename, data)
         if result != '':
             dialogs.show_message('Problems occurred during the creation of the report:\n{}'.format(result), 'Error')
+
+        self.skeleton_results_olv.SetFocus()
+
+    def create_report_skull_svg(self):
+        """
+        generating a skull picture
+        """
+
+        filename = ""
+        wildcard = "SVG files (*.svg)|*.svg"
+        with wx.FileDialog(self, "Create a picture", wildcard=wildcard, style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as dialog:
+            if dialog.ShowModal() == wx.ID_OK:
+                filename = dialog.GetPath()
+
+        if filename == "":
+            return
+
+        my_id = self.skeleton_results_olv.GetSelectedObject().skeleton_id
+        rekord = controller.find_skeleton(self.session, my_id)
+        if rekord == None:
+            dialogs.show_message('No record was found', 'Error')
+            return
+
+        data = {}
+        data['site'] = rekord.site
+        data['location'] = rekord.location
+        data['skeleton'] = rekord.skeleton
+        data['observer'] = rekord.observer
+        data['obs_date'] = rekord.obs_date
+        data['frontal'] = rekord.frontal
+        data['sphenoid'] = rekord.sphenoid
+        data['mandible'] = rekord.mandible
+        data['ethmoid'] = rekord.ethmoid
+        data['parietal_l'] = rekord.parietal_l
+        data['parietal_r'] = rekord.parietal_r
+        data['nasal_l'] = rekord.nasal_l
+        data['nasal_r'] = rekord.nasal_r
+        data['palatine_l'] = rekord.palatine_l
+        data['palatine_r'] = rekord.palatine_r
+        data['thyroid'] = rekord.thyroid
+        data['occipital'] = rekord.occipital
+        data['maxilla_l'] = rekord.maxilla_l
+        data['maxilla_r'] = rekord.maxilla_r
+        data['lacrimal_l'] = rekord.lacrimal_l
+        data['lacrimal_r'] = rekord.lacrimal_r
+        data['hyoid'] = rekord.hyoid
+        data['temporal_l'] = rekord.temporal_l
+        data['temporal_r'] = rekord.temporal_r
+        data['zygomatic_l'] = rekord.zygomatic_l
+        data['zygomatic_r'] = rekord.zygomatic_r
+        data['orbit_l'] = rekord.orbit_l
+        data['orbit_r'] = rekord.orbit_r
+        data['calotte'] = rekord.calotte
+
+        report = SheetExport()
+        result = report.export_skull_svg(filename, data)
+        if result != '':
+            dialogs.show_message('Problems occurred during the creation of the picture:\n{}'.format(result), 'Error')
 
         self.skeleton_results_olv.SetFocus()
 
@@ -401,12 +501,16 @@ class SkeletonFrame(wx.Frame):
         file_menu.Append(wx.ID_ANY, "&Recent Files", recent)
 
         file_menu.AppendSeparator()
+        export_xlsx_menu_item = file_menu.Append(wx.ID_ANY, 'Export to XLSX\tCtrl+L', 'Export database to xlsx file')
+
+        file_menu.AppendSeparator()
         exit_menu_item = file_menu.Append(wx.ID_EXIT, '&Quit\tCtrl+Q', 'Quit application')
 
         menu_bar.Append(file_menu, "&File")
         self.Bind(wx.EVT_MENU, self.panel.on_open_file, open_db_menu_item)
         self.Bind(wx.EVT_MENU, self.panel.on_create_file, create_db_menu_item)
         self.Bind(wx.EVT_MENU_RANGE, self.on_file_history, id=wx.ID_FILE1, id2=wx.ID_FILE9)
+        self.Bind(wx.EVT_MENU, self.panel.on_export_file, export_xlsx_menu_item)
         self.Bind(wx.EVT_MENU, self.on_exit, exit_menu_item)
 
         help_menu = wx.Menu()

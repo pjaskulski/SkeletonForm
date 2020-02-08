@@ -11,6 +11,7 @@ from svglib.svglib import svg2rlg
 from lxml import etree
 import os
 import platform
+from shutil import copyfile
 
 
 class SheetExport():
@@ -164,7 +165,8 @@ class SheetExport():
         elements.append(s)
 
         # prepare SVG
-        self.create_svg("skull_tmp", data)
+        template = 'skull_small.svg'
+        self.create_svg(template, "skull_tmp", data)
 
         # add svg to report
         drawing = svg2rlg("skull_tmp.svg")
@@ -185,7 +187,21 @@ class SheetExport():
 
         return result
 
-    def create_svg(self, file_out, bone):
+    def export_skull_svg(self, filename, data):
+        # prepare SVG
+        template = 'skull_small.svg'
+        self.create_svg(template, "skull_tmp", data)
+
+        if os.path.exists('skull_tmp.svg'):
+            copyfile('skull_tmp.svg', filename)
+            os.remove('skull_tmp.svg')
+            result = ''
+        else:
+            result = 'No SVG file was created.'
+
+        return result
+
+    def create_svg(self, template, file_out, bone):
         """ """
         colors = {}
         colors[0] = 'fill:#ffffff'
@@ -194,7 +210,7 @@ class SheetExport():
         colors[3] = 'fill:#4b4b4b'
         colors[4] = 'fill:#000000'
 
-        doc = etree.parse('svg/skull_small.svg')
+        doc = etree.parse('svg/' + template)
         for action, el in etree.iterwalk(doc):
             id = el.attrib.get('id')
             if id != None:
@@ -226,5 +242,3 @@ class SheetExport():
             my_id = tab[0]
 
         return my_id
-
-
