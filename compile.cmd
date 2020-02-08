@@ -3,4 +3,4 @@ mkdir dist\skeleton\tinycss2
 copy utils\tinycss2\version dist\skeleton\tinycss2
 mkdir dist\skeleton\svg
 copy svg\*.* dist\skeleton\svg
-copy LICENCE dist\skeleton
+copy LICENSE dist\skeleton
