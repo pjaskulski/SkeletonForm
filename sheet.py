@@ -169,6 +169,7 @@ class SheetExport():
         # add svg to report
         drawing = svg2rlg("skull_tmp.svg")
         drawing.hAlign = 'CENTER'
+        elements.append(Spacer(0, 5 * mm))
         elements.append(drawing)
 
         # write the document to disk
@@ -196,9 +197,9 @@ class SheetExport():
         doc = etree.parse('svg/skull_small.svg')
         for action, el in etree.iterwalk(doc):
             id = el.attrib.get('id')
+            if id != None:
+                id = self.clear_id(id)
             if id in bone:
-                # print(el.tag)
-                # print(el.attrib)
                 attributes = el.attrib
                 if bone[id] != None and bone[id] >= 0:
                     attributes["style"] = colors[bone[id]] + ";fill-opacity:1"
@@ -217,3 +218,13 @@ class SheetExport():
         drawing = svg2rlg(file_out + '.svg')
         #renderPDF.drawToFile(drawing, file_out + '.pdf')
         #renderPM.drawToFile(drawing, file_out + '.png', fmt="PNG")
+
+    def clear_id(self, my_id):
+        pos = my_id.find('-')
+        if pos != -1:
+            tab = my_id.split('-')
+            my_id = tab[0]
+
+        return my_id
+
+
