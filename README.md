@@ -16,6 +16,8 @@ Linux (Ubuntu 18.04):
  * pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
  * apt install libsdl1.2debian
  
+ While the program is running in Ubuntu 18.04 you may encounter GTK warnings displayed in the console. The problem is known (https://github.com/wxWidgets/Phoenix/issues/1297) but not solvable.
+ 
  ![Screen](/doc/screen_linux.png)
  
  ![Screen](/doc/screen_linux2.png)
