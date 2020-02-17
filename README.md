@@ -7,16 +7,25 @@ The application uses ObjectListView, in this object is known problem (https://st
 
 Windows:
 
+release 0.1: https://github.com/pjaskulski/SkeletonForm/releases/download/v0.1/skeleton.zip
+
+Screenshots:
+
 ![Screen](/doc/screen.png)
 
 ![Screen](/doc/screen2.png)
 
 Linux (Ubuntu 18.04):
 
- * pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
+release 0.1: https://github.com/pjaskulski/SkeletonForm/releases/download/v0.1/skeletonform_0.1.tar.gz
+
+To run from sources:
+ * install wxPython: pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-18.04 wxPython
  * apt install libsdl1.2debian
  
  While the program is running in Ubuntu 18.04 you may encounter GTK warnings displayed in the console. The problem is known (https://github.com/wxWidgets/Phoenix/issues/1297) but not solvable.
+ 
+ Screenshots:
  
  ![Screen](/doc/screen_linux.png)
  
