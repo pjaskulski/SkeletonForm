@@ -3,5 +3,5 @@ SQLAlchemy==1.3.13
 ReportLab==3.6.13 
 XlsxWriter==1.2.7
 ObjectListView==1.3.1
-svglib==0.9.4
+svglib==2.3.1
 lxml>=4.6.2
